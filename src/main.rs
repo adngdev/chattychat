@@ -2,6 +2,7 @@ use axum::{Router, routing::get};
 
 mod database;
 mod model;
+mod repo;
 mod state;
 
 use state::AppState;

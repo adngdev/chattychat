@@ -20,5 +20,5 @@ pub struct Message {
 pub struct Room {
     pub id: Uuid,
     pub name: String,
-    pub limit: u32,
+    pub max_members: u32,
 }

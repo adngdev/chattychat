@@ -5,7 +5,8 @@ CREATE TABLE users (
 
 CREATE TABLE rooms (
     id   BLOB PRIMARY KEY NOT NULL,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    max_members INT NOT NULL DEFAULT 2
 );
 
 CREATE TABLE messages (
