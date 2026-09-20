@@ -7,6 +7,7 @@ use uuid::Uuid;
 pub struct User {
     pub id: Uuid,
     pub name: String,
+    pub created_at: DateTime<Utc>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
@@ -14,6 +15,7 @@ pub struct Message {
     pub id: Uuid,
     pub content: String,
     pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
@@ -21,4 +23,6 @@ pub struct Room {
     pub id: Uuid,
     pub name: String,
     pub max_members: u32,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
 }

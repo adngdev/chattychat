@@ -1,6 +1,6 @@
-use sqlx::SqlitePool;
+use crate::repo::room::RoomRepo;
 
 #[derive(Clone)]
 pub struct AppState {
-    pub db: SqlitePool,
+    pub rooms: RoomRepo,
 }
