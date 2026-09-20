@@ -34,4 +34,27 @@ impl RoomRepo {
             updated_at: now,
         })
     }
+
+    pub async fn list(&self, limit: u32, page: u32) -> Result<Vec<Room>, Error> {
+        let offset = (page - 1) * limit;
+
+        sqlx::query_as::<_, Room>(
+            "SELECT id, name, max_members, created_at, updated_at
+            FROM rooms
+            ORDER BY created_at DESC
+            LIMIT ? OFFSET ?",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(&self.pool)
+        .await
+    }
+
+    pub async fn count(&self) -> Result<u32, Error> {
+        let (total,): (i64,) = sqlx::query_as("SELECT COUNT(*) FROM rooms")
+            .fetch_one(&self.pool)
+            .await?;
+
+        Ok(total as u32)
+    }
 }
