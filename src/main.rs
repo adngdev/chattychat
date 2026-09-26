@@ -1,19 +1,18 @@
-use axum::{Router, routing::get};
-
 mod database;
 mod model;
 mod repo;
 mod routes;
 mod state;
 
-use crate::repo::room::RoomRepo;
+use crate::repo::{room::RoomRepo, user::UserRepo};
 use state::AppState;
 
 #[tokio::main]
 async fn main() {
     let pool = database::connect().await;
     let state = AppState {
-        rooms: RoomRepo::new(pool),
+        rooms: RoomRepo::new(pool.clone()),
+        users: UserRepo::new(pool),
     };
 
     let app = routes::router().with_state(state);
